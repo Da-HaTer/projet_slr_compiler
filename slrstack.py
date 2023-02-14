@@ -14,13 +14,11 @@ def slr_parser(productions,headers,table, input_str):
         action = table[int(current_state)][headers.index(current_input)+1]
         
         if action=="err":
-            # expected=[i if (i[0] in "rs") else None for i in table[int(current_state)]]
             expected=[]
             for i,col in enumerate(table[int(current_state)]):
                 if col[0] in "rs":
                     expected.append(headers[i-1])
             raise Exception(f"SyntaxError \n{input_str} \n ^\n unexpected {current_input} \n expected symbols: {expected}")
-            # return "Error: invalid syntax"
 
         if action[0] == 's':
             stack.append(current_input)

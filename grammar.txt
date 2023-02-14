@@ -1,0 +1,39 @@
+program -> algorithme identifier declarationlist debut statementlist fin
+declarationlist -> declarationlist declaration
+declarationlist -> declaration
+declaration -> type identifierlist ;
+identifierlist -> identifierlist , identifier
+identifierlist -> identifier
+statementlist -> statementlist statement
+statementlist -> statement
+statement -> readstatement
+statement -> printstatement
+statement -> assignmentstatement
+statement -> ifstatement
+statement -> forstatement
+readstatement -> lire identifierlist ;
+printstatement -> afficher expressionlist ;
+expressionlist -> expression
+expressionlist -> expressionlist , expression
+expression -> expression relop term
+expression -> expression addop term
+expression -> term
+term -> term logop factor
+term -> term mulop factor
+term -> factor
+factor -> identifier
+factor -> number
+factor -> ( expression )
+factor -> stringliteral
+assignmentstatement -> identifier <- expression ;
+ifstatement -> si expression alors statementlist sinon statementlist finsi
+forstatement -> pour identifier de number à number faire statementlist finpour
+
+AddOp -> + | -
+MulOp -> * | /
+Type -> "entier" | "reel" | "booleen" | "tableau d'entiers"
+Identifier -> [a-zA-Z]+
+StringLiteral -> '"' ([^"]|'')* '"'
+Number -> [0-9]+
+LogOp -> "et" | "ou"
+RelOp -> "<=" | "<" | ">=" | ">" | "=" | "!="

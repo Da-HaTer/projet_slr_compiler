@@ -22,10 +22,3 @@ def get_productions(grammar):
         del i[1]
         productions.append(i)
     return productions
-
-# Print the results
-# print(headers[4:])
-# for row in rows:
-#     print(row)
-
-#can remove state column:  row[i] : i state

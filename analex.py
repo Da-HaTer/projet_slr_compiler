@@ -56,54 +56,14 @@ def lex(text):
                 j += 1
             tokens.append(('stringLiteral', text[i + 1:j].replace('\\"', '"')))
             i = j + 1
-        # elif text[i] in ';,()+-*/':
-        #     i+=1
         else:
             raise Exception('{} is undefined'.format(text[i]))
-        # i += 1
     return tokens
-    #todo minusequal,assigment,  remove ; ? (expression) in table ?
-# print(lex())
-
-# longstr="""Algorithme maximum 
-# entier a, b, c; 
-# debut 
-# lire a ; 
-# lire b ;
-# si a < b alors 
-# afficher "a est plus petit b" ;
-# sinon
-# afficher "a est plus grand b" ;
-# finsi 
-# c <- b * b + 4 * a *c ;
-# afficher c ;
-# fin """
 
 def analysis(longstr):
     instructions= longstr.split('\n')
     for j,instruction in enumerate(instructions):
-        # input= instruction
-        # print(f'input: {input}')
         output=lex(instruction)
         output=[i[0].lower() for i in output]
         instructions[j]=' '.join(output)
-        # print(f'output: {output}')
-        # print("-"*20)
     return ' '.join(instructions)
-
-
-#todo: fix many none types like operators and instructions
-"""
-algorithme maximum 
-entier a, b, c; 
-debut 
-lire a ; 
-lire b ;
-si a < b alors 
-afficher "a est plus petit b" 
-sinon
-afficher "a est plus grand b" 
-finsi 
-c <- b * b + 4 * a *c 
-afficher c 
-fin """
