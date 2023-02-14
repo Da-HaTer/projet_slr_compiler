@@ -1,0 +1,223 @@
+Etape 1 : description du langage 
+Vous allez definir un langage qui doit comporter au minimum les elements suivants : 
+-Des variables de type entier, reel, booleens, tableau d'enfiers,.. 
+-Des operateurs arithmetiques, logiques, relationnels *, /, <, >, ...) 
+-Des parentheses, des accolades, .. . 
+-Instruction d'affectation, instruction de lecture ou affectation de variables, instruction d'affichage de chaines de caracteres et de variables ,. . . 
+-Structures de controle simples et imbriquees : conditionnelle si . . . alors . sinon . finsi, . iterative pour . . . finpour,...
+
+
+Travail a faire 
+Rediger un document proposant un langage respectant les contraintes precedentes ainsi que celles dont vous proposez. Ce document doit permettre a un utilisateur quelconque de construire un programme respectant la syntaxe et la semantique de votre langage. 
+
+Etape 2 : realisation du compilateur 
+La realisation du compilateur se fera a l'aide des outils flex et bison : 
+1. Construisez l'analyseur lexical correspondant a votre langage, 
+2. Construisez l'analyseur syntaxique correspondant ce langage, 
+3. Rajoutez des actions semantiques permettant d'effectuer des verifications sernantiques sur un programme source : controle de type, valeur des indices du tableau,...)
+
+4. Produire le code cible qui est un code a trois adresses en C. Les expressions complexes devront etre traduites en affectation a trois adresses. 
+5. L'utilisation des structures iteratives du C est interdite (on pourra utiliser les branchements goto vers des etiquettes etiq). L'utilisation du if then else est interdite, mais le if then est autorise. 
+
+
+
+Travail a faire 
+Redigez un rapport papier (pas de version electronique) contenant : 
+-une description detaillee du projet, c'est a dire des choix retenus pour le langage, des methodes de traduction (en particulier pour les structures de controle) ainsi que les parties non traitees, 
+-les codes de l'analyseur lexical et syntaxique sans instructions C, 
+-les codes de l'analyseur lexical et syntaxique avec instructions C, 
+-des exemples, 
+-une traduction en code a trois adresses 
+NB : Le code sera testé sur les machines des etudiants. 
+
+Exemple de programme 
+algorithme maximum 
+entier a, b, c; 
+debut 
+lire a ; 
+lire b ;
+si a < b alors 
+afficher "a est plus petit b" 
+sinon
+afficher "a est plus grand b" 
+finsi 
+c <- b * b + 4 * a *c 
+afficher c 
+fin 
+
+Traduction en code C à trois adresses 
+/* variables temporaires pour le code à 3 adresses */ 
+int templ, temp2, temp3; 
+/* variables du programme */ 
+int a, b, c; 
+/* debut du programme */ 
+
+
+
+
+
+
+
+
+
+
+Program -> "algorithme" Identifier DeclarationList "debut" StatementList "fin"
+DeclarationList -> DeclarationList Declaration | Declaration
+Declaration -> Type IdentifierList ';'
+Type -> "entier" | "reel" | "booleen" | "tableau d'entiers"
+IdentifierList -> IdentifierList ',' Identifier | Identifier
+Identifier -> [a-zA-Z]+
+StatementList -> StatementList Statement | Statement
+Statement -> ReadStatement | PrintStatement | AssignmentStatement | IfStatement | ForStatement
+ReadStatement -> "lire" IdentifierList ';'
+PrintStatement -> "afficher" ExpressionList ';'
+ExpressionList -> Expression | ExpressionList ',' Expression
+Expression -> Expression RelOp Term | Term
+RelOp -> "<=" | "<" | ">=" | ">" | "=" | "!="
+Term -> Term LogOp Factor | Factor
+LogOp -> "et" | "ou"
+Factor -> Identifier | Number | ( Expression ) | StringLiteral
+Number -> [0-9]+
+StringLiteral -> '"' ([^"]|'')* '"'
+AssignmentStatement -> Identifier '<-' Expression ';'
+IfStatement -> "si" Expression "alors" StatementList "sinon" StatementList "finsi"
+ForStatement -> "pour" Identifier "de" Number "à" Number "faire" StatementList "finpour"
+
+
+modified slr :
+Program -> "algorithme" Identifier DeclarationList "debut" StatementList "fin"
+DeclarationList -> DeclarationList Declaration | Declaration
+Declaration -> Type IdentifierList ';'
+Type -> "entier" | "reel" | "booleen" | "tableau d'entiers"
+IdentifierList -> IdentifierList ',' Identifier | Identifier
+Identifier -> [a-zA-Z]+
+StatementList -> StatementList Statement | Statement
+Statement -> ReadStatement | PrintStatement | AssignmentStatement | IfStatement | ForStatement
+ReadStatement -> "lire" IdentifierList ';'
+PrintStatement -> "afficher" ExpressionList ';'
+ExpressionList -> Expression | ExpressionList ',' Expression
+Expression -> Expression RelOp Term | Term
+RelOp -> "<=" | "<" | ">=" | ">" | "=" | "!="
+Term -> Term LogOp Factor | Factor
+LogOp -> "et" | "ou"
+Factor -> Identifier | Number | ( Expression ) | StringLiteral
+Number -> [0-9]+
+StringLiteral -> '"' ([^"]|'')* '"'
+AssignmentStatement -> Identifier '<-' Expression ';'
+IfStatement -> "si" Expression "alors" StatementList "sinon" StatementList "finsi"
+ForStatement -> "pour" Identifier "de" Number "à" Number "faire" StatementList "finpour"
+
+
+Program -> "algorithme" Identifier DeclarationList "debut" StatementList "fin"
+DeclarationList -> DeclarationList Declaration
+DeclarationList -> Declaration
+Declaration -> Type IdentifierList ';'
+IdentifierList -> IdentifierList ',' Identifier
+IdentifierList -> Identifier
+StatementList -> StatementList Statement
+StatementList -> Statement
+Statement -> ReadStatement
+Statement -> PrintStatement
+Statement -> AssignmentStatement
+Statement -> IfStatement
+Statement -> ForStatement
+ReadStatement -> "lire" IdentifierList ';'
+PrintStatement -> "afficher" ExpressionList ';'
+ExpressionList -> Expression
+ExpressionList -> ExpressionList ',' Expression
+Expression -> Expression RelOp Term
+Expression -> Term
+Term -> Term LogOp Factor
+Term -> Factor
+Factor -> Identifier
+Factor -> Number
+Factor -> ( Expression )
+Factor -> StringLiteral
+AssignmentStatement -> Identifier '<-' Expression ';'
+IfStatement -> "si" Expression "alors" StatementList "sinon" StatementList "finsi"
+ForStatement -> "pour" Identifier "de" Number "à" Number "faire" StatementList "finpour"
+
+
+algorithme nom
+entier x;
+debut 
+lire x ;
+afficher "abc",x;
+fin 
+
+
+Algorithme Identifier Type Identifier ; debut lire Identifier ; afficher StringLiteral , Identifier ; fin  //example
+
+
+
+div id = lrTableView
+
+1st row lr table: ignore
+2nd row: state action goto: constant
+
+
+
+Program -> algorithme Identifier DeclarationList debut StatementList fin
+DeclarationList -> DeclarationList Declaration
+DeclarationList -> Declaration
+Declaration -> Type IdentifierList ;
+IdentifierList -> IdentifierList , Identifier
+IdentifierList -> Identifier
+StatementList -> StatementList Statement
+StatementList -> Statement
+Statement -> ReadStatement
+Statement -> PrintStatement
+Statement -> AssignmentStatement
+Statement -> IfStatement
+Statement -> ForStatement
+ReadStatement -> lire IdentifierList ;
+PrintStatement -> afficher ExpressionList ;
+ExpressionList -> Expression
+ExpressionList -> ExpressionList , Expression
+Expression -> Expression RelOp Term
+Expression -> Expression AddOp Term
+Expression -> Term
+Term -> Term LogOp Factor
+Term -> Term MulOp Factor
+Term -> Factor
+Factor -> Identifier
+Factor -> Number
+Factor -> ( Expression )
+Factor -> StringLiteral
+AssignmentStatement -> Identifier <- Expression ;
+IfStatement -> si Expression alors StatementList sinon StatementList finsi
+ForStatement -> pour Identifier de Number à Number faire StatementList finpour
+
+
+LC
+
+program -> algorithme identifier declarationlist debut statementlist fin
+declarationlist -> declarationlist declaration
+declarationlist -> declaration
+declaration -> type identifierlist ;
+identifierlist -> identifierlist , identifier
+identifierlist -> identifier
+statementlist -> statementlist statement
+statementlist -> statement
+statement -> readstatement
+statement -> printstatement
+statement -> assignmentstatement
+statement -> ifstatement
+statement -> forstatement
+readstatement -> lire identifierlist ;
+printstatement -> afficher expressionlist ;
+expressionlist -> expression
+expressionlist -> expressionlist , expression
+expression -> expression relop term
+expression -> expression addop term
+expression -> term
+term -> term logop factor
+term -> term mulop factor
+term -> factor
+factor -> identifier
+factor -> number
+factor -> ( expression )
+factor -> stringliteral
+assignmentstatement -> identifier <- expression ;
+ifstatement -> si expression alors statementlist sinon statementlist finsi
+forstatement -> pour identifier de number à number faire statementlist finpour
