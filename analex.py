@@ -28,7 +28,7 @@ def lex(text):
                 j += 1
             tokens.append(('number', int(text[i:j])))
             i = j
-        elif text[i] in '<->':
+        elif text[i] in '<->=!':
             if i + 1 < len(text) and text[i:i+2]=='<-':
                 tokens.append(('<-', None))
                 i += 2
@@ -38,7 +38,6 @@ def lex(text):
             else:
                 tokens.append(('relOp', text[i]))
                 i += 1
-                
         elif text[i] in '+-':  
             tokens.append(('addOp', text[i]))
             i += 1

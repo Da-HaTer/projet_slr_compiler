@@ -27,6 +27,7 @@ factor -> ( expression )
 factor -> stringliteral
 assignmentstatement -> identifier <- expression ;
 ifstatement -> si expression alors statementlist sinon statementlist finsi
+ifstatement -> si expression alors statementlist finsi
 forstatement -> pour identifier de number à number faire statementlist finpour
 
 AddOp -> + | -

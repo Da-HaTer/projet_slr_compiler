@@ -14,7 +14,10 @@ sinon
 afficher "a est plus grand b" ; 
 finsi 
 c <- b * b + 4 * a *c ;
+si a != b alors
 afficher c;
+lire d;
+finsi
 fin """
 
 
@@ -28,6 +31,7 @@ input_str=analysis(input)
 input=" ".join(input.split("\n"))
 os.system("cls")
 print(f"input:\n{input}\nlexical analysis:\n{'-'*100}\n{input_str}\n")
+print (headers,input_str,sep="\n")
 result=slr_parser(productions,headers,table, input_str)
 from prettytable import PrettyTable
 mytable=PrettyTable(result[0])
