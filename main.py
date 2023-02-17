@@ -3,8 +3,11 @@
 input="""algorithme maximum 
 entier a, b, c ; 
 debut 
-lire a ; 
+lire a ;// this is a single line comment 
 lire b ;
+/* hello please ignore all of this
+c <- b * b + 4 * a *c 
+*/
 si a < b alors 
 afficher "a est plus petit b" ;
 sinon

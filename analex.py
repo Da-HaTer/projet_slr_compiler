@@ -61,9 +61,6 @@ def lex(text):
     return tokens
 
 def analysis(longstr):
-    instructions= longstr.split('\n')
-    for j,instruction in enumerate(instructions):
-        output=lex(instruction)
-        output=[i[0].lower() for i in output]
-        instructions[j]=' '.join(output)
-    return ' '.join(instructions)
+    output=lex(longstr)
+    output=[i[0].lower() for i in output]
+    return (' '.join(output))
